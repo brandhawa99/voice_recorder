@@ -36,8 +36,9 @@ const VoiceRecord = () =>{
   const playSound = async() =>{
     try{
       console.log("loading sound"); 
-      const {sound} = await Audio.Sound.createAsync(require("./assets/music/1.mp4")); 
-      setSound(sound); 
+      const {sound} = await Audio.Sound.createAsync(URI); 
+      setSound(sound);
+      console.log(sound); 
       await sound.playAsync(); 
     }catch(e){
       console.log(e);
@@ -58,9 +59,9 @@ const VoiceRecord = () =>{
         <Text>Record</Text>
         <View style={styles.button}>
           <Button style={styles.recordButton} title={recording? "Stop Recording":"Start Recording"} onPress={recording?stopRecording:startRecording}/>
+          <Button title="Play Sound" onPress={playSound} />
         </View>
         <View>
-          <Button title="Play Sound" onPress={playSound} />
         </View>
     </SafeAreaView>
   )
@@ -69,10 +70,11 @@ const VoiceRecord = () =>{
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    alignItems:"center"
+    alignItems:"center",
   },
   recordButton:{
-    color:"white"
+    paddingBottom:20,
+    color:"white",
   },
 })
 
